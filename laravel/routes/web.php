@@ -29,6 +29,7 @@ Route::get('/restricted', function () {
 Route::middleware(['auth', IsAdmin::class])->group(function () {
 
     Route::resource('/pengguna', UserController::class)->except('detroy', 'show');
+    Route::resource('/siswa', 'App\Http\Controllers\SiswaController')->except('detroy', 'show');
     Route::get('/reset/{id}', [UserController::class, 'reset'])->name('reset');
     Route::get('/uploadxlsx', [ImportUserController::class, 'index'])->name('uploadexcel');
     Route::post('/uploadfile', [ImportUserController::class, 'import'])->name('uploadfile');
@@ -49,7 +50,9 @@ Route::middleware(['auth', IsAdmin::class])->group(function () {
 
         Route::get('/editabsen/{id}', 'edit_absen')->name('editabsen');
         Route::put('/updateabsen/{id}', 'update_absen')->name('updateabsen');
-    });
+    }); 
+
+    Route::resource('/perusahaan', 'App\Http\Controllers\PerusahaanController')->only(['index','create','update','edit','store']);
 
     Route::resource('/pengaturan', PengaturanController::class)->only(['index', 'update']);
     Route::resource('/liburnasional', LiburnasionalController::class)->except('show');

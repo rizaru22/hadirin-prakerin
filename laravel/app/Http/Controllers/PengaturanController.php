@@ -23,9 +23,6 @@ class PengaturanController extends Controller
     public function update(Request $request, $id):RedirectResponse
     {
         $pengaturan=Pengaturan::findOrFail($id);
-        $pengaturan->nama_instansi=$request->nama_instansi;
-        $pengaturan->latitude=$request->latitude;
-        $pengaturan->longitude=$request->longitude;
         $pengaturan->jarak_maksimal=$request->jarak_maksimal;
         $pengaturan->jam_masuk=$request->jam_masuk;
         $pengaturan->jam_maksimal_masuk=$request->jam_maksimal_masuk;

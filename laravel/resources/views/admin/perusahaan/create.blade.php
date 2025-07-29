@@ -24,21 +24,31 @@
     @endif
 <div class="card card-success">
     <div class="card-header">
-        <h3 class="card-title">Tambah Data Pegawai</h3>
+        <h3 class="card-title">Tambah Data Perusahaan</h3>
     </div>
     <div class="card-body">
 
-        <form action="{{route('pengguna.store')}}" method="post">
+        <form action="{{route('perusahaan.store')}}" method="post">
             @csrf
             <div class="form-group">
-                <label for="nama_siswa">Nama Lengkap Siswa:</label>
-                <input type="text" class="form-control" id="nama_siswa" name="nama_siswa" placeholder="Nama Lengkap" required>
+                <label for="nama">Nama Perusahaan:</label>
+                <input type="text" class="form-control" id="nama_perusahaan" name="nama_perusahaan" placeholder="Nama Perusahaan" required>
             </div>
 
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="jhondoe@guru.smk.belajar.id" required>
+              <div class="form-group">
+                <div class="row">
+                    <div class="col-6">
+                        <label for="latitude">Latitude :</label>
+                        <input type="text" class="form-control" id="latitude" name="latitude" >
+                    </div>
+                    <div class="col-6">
+                        <label for="logitude">Longitude:</label>
+                        <input type="text" class="form-control" id="longitude" name="longitude" >
+                    </div>
+        
+                </div>
             </div>
+          
     </div>
     <div class="card-footer">
         <button type="submit" class="btn btn-success float-right"><i class="fas fa-save"></i> Simpan</button>

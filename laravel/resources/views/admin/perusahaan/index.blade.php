@@ -13,21 +13,21 @@
         }
     </style>
 @endsection
-@section('namaHalaman','Daftar Pegawai')
+@section('namaHalaman','Daftar Perusahaan')
 @section('konten')
 <div class="card">
     <div class="card-header">
-    <a href="{{route('uploadexcel')}}"  class="btn btn-md btn-success float-right  "> <i class="fas fa-file-excel"></i> Import Data</a>
-    <a href="{{route('pengguna.create')}}"  class="btn btn-md btn-primary float-right mr-5"> <i class="fas fa-user-plus"></i> Tambah Data</a>
+   
+    <a href="{{route('perusahaan.create')}}"  class="btn btn-md btn-primary float-right mr-5"> <i class="fas fa-user-plus"></i> Tambah Data</a>
     </div>
     <div class="card-body">
     <table id="example1" class="table table-bordered table-striped ">
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama</th>
-
-                        <th>Username</th>
+                        <th>Perusahaan</th>
+                        <th>Siswa</th>
+                        <th>Peta</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -36,17 +36,21 @@
                     @foreach($data as $dt)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $dt->name }}</td>
-
-                        <td>{{ $dt->username }}</td>
+                        <td>{{ $dt->nama_perusahaan }}</td>
+                        <td>
+                        <ol>
+                        @foreach($dt->siswa as $subdt)
+                        <li>{{ $subdt->nama_siswa }}</li>
+                        @endforeach
+                        </ol>
+                        </td>
+                        <td><a href="https://www.google.com/maps?q={{$dt->latitude.",".$dt->longitude}}" target="_blank"><i class="fas fa-map"></i></a></td>
                         <td>
                             <div class="btn-group">
-                                <a type="button" class="btn btn-sm btn-warning btn-flat" href="{{route('pengguna.edit',$dt->id)}}">
+                                <a type="button" class="btn btn-sm btn-warning btn-flat" href="{{route('perusahaan.edit',$dt->id)}}">
                                     <i class=" fas fa-edit"></i>
                                 </a>
-                                <a type="button" class="btn btn-sm btn-danger btn-flat" href="{{route('reset',$dt->id)}}">
-                                    <i class=" fas fa-key"></i>
-                                </a>
+                          
                             </div>
                         </td>
                     </tr>

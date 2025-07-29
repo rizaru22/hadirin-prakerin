@@ -21,7 +21,7 @@ class LaporanController extends Controller
     protected $belumAbsenPulang=0;
     public function ambilDataAbsenHarian($id, $tanggal)
     {
-        $data = Absensi::select('absensis.id as idabsen','users.id', 'users.name', 'users.nip', 'absensis.jam_masuk', 'absensis.jam_pulang', 'absensis.foto_masuk', 'absensis.foto_pulang', 'absensis.foto_izin')
+        $data = Absensi::select('absensis.id as idabsen','users.id', 'users.name', 'absensis.jam_masuk', 'absensis.jam_pulang', 'absensis.foto_masuk', 'absensis.foto_pulang', 'absensis.foto_izin')
             ->join('users', 'absensis.user_id', '=', 'users.id')
             ->whereDate('absensis.created_at', $tanggal)
             ->where('user_id', $id)
@@ -39,7 +39,7 @@ class LaporanController extends Controller
     {
         $tanggal = Carbon::parse($request['tanggal']);
         $this->hitungYangSudahAbsen($tanggal);
-        $allUsers = User::select('id', 'name', 'nip')
+        $allUsers = User::select('id', 'name')
             ->where('role', 'user')
             ->orderBy('name')
             ->get()
@@ -54,7 +54,7 @@ class LaporanController extends Controller
                     "idabsen"=>null,
                     "id" => $au['id'],
                     "name" => $au['name'],
-                    "nip" => $au['nip'],
+                    
                     "jam_masuk" => "0",
                     "jam_pulang" => "0",
                     "foto_masuk" => "0",
@@ -101,7 +101,7 @@ class LaporanController extends Controller
         $tanggal = $request['tanggal'];
         $period = CarbonPeriod::create(Carbon::parse($tanggal)->startOfWeek(Carbon::SUNDAY), Carbon::parse($tanggal)->endOfWeek(Carbon::SATURDAY));
 
-        $all_Users = User::select('id', 'name', 'nip')
+        $all_Users = User::select('id', 'name')
             ->where('role', 'user')
             ->orderBy('name')
             ->get()
@@ -142,7 +142,7 @@ class LaporanController extends Controller
             $detik=(int) $jam_kerja_per_minggu-(($jam*3600)+($menit*60));
             $string_Jam_Kerja_Per_Minggu=$jam.' Jam '.$menit.' menit '.$detik.' detik ';
 
-            $data_lengkap_per_orang = array("nama" => $au['name'], "nip" => $au['nip']);
+            $data_lengkap_per_orang = array("nama" => $au['name']);
             $data_lengkap_per_orang['absen'] = $data_absen_per_orang;
             $data_lengkap_per_orang['total_jam_kerja_per_minggu']=$string_Jam_Kerja_Per_Minggu;
             $seluruh_data[]=$data_lengkap_per_orang;
@@ -176,7 +176,7 @@ class LaporanController extends Controller
         $tanggal_Akhir=Carbon::parse($bulan)->endOfMonth();
         $period=CarbonPeriod::create($tanggal_Awal,$tanggal_Akhir);
 
-        $all_Users = User::select('id', 'name', 'nip')
+        $all_Users = User::select('id', 'name')
         ->where('role', 'user')
         ->orderBy('name')
         ->get()
@@ -204,7 +204,7 @@ class LaporanController extends Controller
             }
           
 
-            $data_lengkap_per_orang = array("nama" => $au['name'], "nip" => $au['nip']);
+            $data_lengkap_per_orang = array("nama" => $au['name']);
             $data_lengkap_per_orang['absen'] = $data_absen_per_orang;
         
             $seluruh_data[]=$data_lengkap_per_orang;
@@ -233,7 +233,7 @@ class LaporanController extends Controller
             $dinas_luar=0;
             $scan=0;
             
-            $data_rekap_per_orang=array("nama"=>$au['name'],"nip"=>$au['nip']);
+            $data_rekap_per_orang=array("nama"=>$au['name']);
             foreach ($period as $date) {
                 $data = Absensi::select('jam_masuk', 'jam_pulang')
                     ->where('user_id', $au['id'])

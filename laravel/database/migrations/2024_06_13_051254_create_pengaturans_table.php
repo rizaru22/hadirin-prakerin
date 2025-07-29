@@ -13,9 +13,6 @@ return new class extends Migration
     {
         Schema::create('pengaturans', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_instansi');
-            $table->double('latitude');
-            $table->double('longitude');
             $table->string('jam_masuk',length:20);
             $table->string('jam_pulang',length:20);
             $table->string('jam_maksimal_masuk',length:20);
@@ -23,7 +20,6 @@ return new class extends Migration
             $table->double('jarak_maksimal');
             $table->string('group_wa_id')->nullable();
             $table->string('token')->nullable();
-
             $table->timestamps();
         });
     }

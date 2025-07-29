@@ -9,9 +9,6 @@ class Pengaturan extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nama_instansi',
-        'latitude',
-        'longitude',
         'jam_masuk',
         'jam_pulang',
         'jam_maksimal_masuk',

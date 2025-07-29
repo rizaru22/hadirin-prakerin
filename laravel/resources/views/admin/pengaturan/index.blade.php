@@ -32,22 +32,13 @@
         <form action="{{route('pengaturan.update',$data->id)}}" method="post">
             @csrf
             @method('PUT')
-            <div class="form-group">
-                <label for="nama">Nama Instanssi:</label>
-                <input type="text" class="form-control" id="nama_instansi" name="nama_instansi" value="{{$data->nama_instansi}}" required>
-            </div>
+            
 
             <div class="form-group">
                 <div class="row">
-                    <div class="col-4">
-                        <label for="nip">Latitude:</label>
-                        <input type="number" class="form-control" id="latitude" name="latitude" value="{{$data->latitude}}" step="any">
-                    </div>
-                    <div class="col-4">
-                        <label for="nip">Longitude:</label>
-                        <input type="number" class="form-control" id="longitude" name="longitude" value="{{$data->longitude}}" step="any">
-                    </div>
-                    <div class="col-4">
+                 
+                  
+                    <div class="col-12">
                         <label for="nip">Jarak Maksimal (meter):</label>
                         <input type="number" class="form-control" id="jarak_maksimal" name="jarak_maksimal" value="{{$data->jarak_maksimal}}">
                     </div>

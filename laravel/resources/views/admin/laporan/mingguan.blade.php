@@ -34,7 +34,7 @@
                 @foreach($data as $dt)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $dt['nama'] }} <br>NIP. {{ $dt['nip'] }}</td>
+                    <td>{{ $dt['nama'] }} </td>
                     @foreach($dt['absen'] as $subdt)
                     <td>{{ $subdt['jam_masuk'] }}<br>s.d<br>{{ $subdt['jam_pulang'] }}</td>
                     @endforeach

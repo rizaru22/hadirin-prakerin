@@ -28,7 +28,7 @@ class DashboardAdminController extends Controller
         $dataAbsenHarian = [];
         $tanggal = Carbon::now();
 
-        $allUsers = User::select('id', 'name', 'nip')
+        $allUsers = User::select('id', 'name')
             ->where('role', 'user')
             ->orderBy('name')
             ->get()
@@ -42,7 +42,6 @@ class DashboardAdminController extends Controller
                 $dataBlank = array(
                     "id" => $au['id'],
                     "name" => $au['name'],
-                    "nip" => $au['nip'],
                     "jam_masuk" => "0",
                     "jam_pulang" => "0",
                     "foto_masuk" => "0",
@@ -73,7 +72,7 @@ class DashboardAdminController extends Controller
 
     public function ambilDataAbsenHarian($id, $tanggal)
     {
-        $data = Absensi::select('users.id', 'users.name', 'users.nip', 'absensis.jam_masuk', 'absensis.jam_pulang', 'absensis.foto_masuk', 'absensis.foto_pulang', 'absensis.foto_izin')
+        $data = Absensi::select('users.id', 'users.name', 'absensis.jam_masuk', 'absensis.jam_pulang', 'absensis.foto_masuk', 'absensis.foto_pulang', 'absensis.foto_izin')
             ->join('users', 'absensis.user_id', '=', 'users.id')
             ->whereDate('absensis.created_at', $tanggal)
             ->where('user_id', $id)
@@ -84,7 +83,7 @@ class DashboardAdminController extends Controller
 
     public function ubahPassword(): View
     {
-        $dataUser = User::select('name', 'nip', 'username', 'email')->where('id', Auth::user()->id)->get();
+        $dataUser = User::select('name', 'username', 'email')->where('id', Auth::user()->id)->get();
 
         return view('admin.akun', [
             "title" => "Update Account",

@@ -41,7 +41,7 @@
                 @foreach($data as $dt)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $dt['nama'] }} <br> NIP.{{$dt['nip']}}</td>
+                    <td>{{ $dt['nama'] }} </td>
                     @foreach($dt['absen'] as $subdt)
                     <td>{{ $subdt['jam_masuk'] }}<br> s.d <br>{{ $subdt['jam_pulang'] }}</td>
                     @endforeach
@@ -59,7 +59,7 @@
                 <tr>
                     <th>No</th>     
                     <th>Nama</th>     
-                    <th>NIP</th>     
+                        
                     <th>Normal</th>     
                     <th>Riil</th>     
                     <th>Absen</th>     
@@ -82,7 +82,7 @@
             <tbody>
                 <tr>
                     <td >&nbsp;</td>     
-                    <td >&nbsp;</td>     
+                         
                     <td >&nbsp;</td>     
                     <td>Hari</td>     
                     <td>Hari</td>     
@@ -106,7 +106,7 @@
                <tr>
                 <td >{{ $loop->iteration }}</td>     
                     <td >{{ $rek['nama'] }}</td>     
-                    <td >{{ $rek['nip'] }}</td>     
+                        
                     <td>{{ $rek['normal_hari'] }}</td>     
                     <td>{{ $rek['riil_hari'] }}</td>     
                     <td>{{ $rek['absen_hari'] }}</td>     

@@ -22,6 +22,14 @@
                         </p>
                     </a>
                 </li>
+                         <li class="nav-item">
+                    <a href="{{ route('pengguna.index')}}" class="nav-link {{ ($title==='Pegawai')?'active':'' }}">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            Guru
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="{{route('pengaturan.index')}}" class="nav-link {{ ($title==='Pengaturan')?'active':'' }}">
                         <i class="nav-icon fas fa-cogs"></i>
@@ -31,13 +39,22 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('pengguna.index')}}" class="nav-link {{ ($title==='Pegawai')?'active':'' }}">
-                        <i class="nav-icon fas fa-users"></i>
+                    <a href="{{ route('perusahaan.index')}}" class="nav-link {{ ($title==='Perusahaan')?'active':'' }}">
+                        <i class="nav-icon fas fa-landmark"></i>
                         <p>
-                            Pegawai
+                            DU/DI
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('siswa.index')}}" class="nav-link {{ ($title==='Siswa')?'active':'' }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Siswa
+                        </p>
+                    </a>
+                </li>
+       
                 <li class="nav-item">
                     <a href="{{route('liburnasional.index')}}"
                         class="nav-link {{ ($title==='Libur Nasional')?'active':'' }}">

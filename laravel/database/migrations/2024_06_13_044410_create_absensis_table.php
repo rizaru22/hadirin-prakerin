@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('absensis', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
+            $table->date('tanggal');
+            $table->enum('status', ['hadir', 'izin', 'sakit', 'alpha'])->default('hadir');
             $table->string('jam_masuk');
             $table->string('jam_pulang');
             $table->string('foto_masuk')->nullable();
             $table->string('foto_pulang')->nullable();
             $table->string('foto_izin')->nullable();
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }

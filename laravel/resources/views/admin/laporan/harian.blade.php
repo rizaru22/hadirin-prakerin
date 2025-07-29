@@ -240,7 +240,7 @@
                       
                         <tr>
                             <td>{{ $no }}</td>
-                            <td>{{ $subdah['name'] }} <br>NIP.{{$subdah['nip']}} <br> 
+                            <td>{{ $subdah['name'] }}  <br> 
                             @if(!empty($subdah['idabsen']))
       
                             <a href="{{ route('editabsen',$subdah['idabsen']) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i>Edit Absen</a>

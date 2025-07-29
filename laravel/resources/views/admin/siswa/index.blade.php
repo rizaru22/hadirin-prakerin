@@ -13,12 +13,12 @@
         }
     </style>
 @endsection
-@section('namaHalaman','Daftar Pegawai')
+@section('namaHalaman','Daftar Siswa')
 @section('konten')
 <div class="card">
     <div class="card-header">
     <a href="{{route('uploadexcel')}}"  class="btn btn-md btn-success float-right  "> <i class="fas fa-file-excel"></i> Import Data</a>
-    <a href="{{route('pengguna.create')}}"  class="btn btn-md btn-primary float-right mr-5"> <i class="fas fa-user-plus"></i> Tambah Data</a>
+    <a href="{{route('siswa.create')}}"  class="btn btn-md btn-primary float-right mr-5"> <i class="fas fa-user-plus"></i> Tambah Data</a>
     </div>
     <div class="card-body">
     <table id="example1" class="table table-bordered table-striped ">
@@ -26,22 +26,24 @@
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
-
                         <th>Username</th>
+                        <th>Kelas</th>
+                        <th>Du/DI</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach($data as $dt)
+                    @foreach($siswa as $dt)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $dt->name }}</td>
-
-                        <td>{{ $dt->username }}</td>
+                        <td>{{ $dt->nama_siswa }}</td>
+                        <td>{{ $dt->user->username}}</td>
+                        <td>{{ $dt->kelas}}</td>
+                        <td>{{ $dt->perusahaan->nama_perusahaan }}</td>
                         <td>
                             <div class="btn-group">
-                                <a type="button" class="btn btn-sm btn-warning btn-flat" href="{{route('pengguna.edit',$dt->id)}}">
+                                <a type="button" class="btn btn-sm btn-warning btn-flat" href="{{route('siswa.edit',$dt->id)}}">
                                     <i class=" fas fa-edit"></i>
                                 </a>
                                 <a type="button" class="btn btn-sm btn-danger btn-flat" href="{{route('reset',$dt->id)}}">

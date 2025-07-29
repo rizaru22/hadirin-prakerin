@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Redirect;
 class UserController extends Controller
 {
     public function index(){
-        $user=User::where('role','user')->orderBy('name')->get();
+        $user=User::where('role','admin')->orderBy('name')->get();
         return view('admin.user.index',[
             "title"=>"Pegawai",
             "data"=>$user
@@ -28,12 +28,11 @@ class UserController extends Controller
     public function store(Request $request):RedirectResponse{
         $request->validate([
             "name"=>"required",
-            "nip"=>"nullable",
             "email"=>"required",
         ]);
         $username=strstr($request->email,'@',true);
         $password=Hash::make('1234');
-        $role='user';
+        $role='admin';
 
         $request->merge([
             "username"=>$username,
