@@ -74,7 +74,7 @@ class DashboardAdminController extends Controller
     {
         $data = Absensi::select('users.id', 'users.name', 'absensis.jam_masuk', 'absensis.jam_pulang', 'absensis.foto_masuk', 'absensis.foto_pulang', 'absensis.foto_izin')
             ->join('users', 'absensis.user_id', '=', 'users.id')
-            ->whereDate('absensis.created_at', $tanggal)
+            ->whereDate('absensis.tanggal', $tanggal)
             ->where('user_id', $id)
             ->get()->toArray();
 
@@ -108,14 +108,14 @@ class DashboardAdminController extends Controller
     public function hitungYangSudahAbsen()
     {
         $tanggal = Carbon::now();
-        $this->yang_sakit = Absensi::where('jam_masuk', 'S')->whereDate('created_at', $tanggal)->count('user_id');
-        $this->yang_dinas_luar = Absensi::where('jam_masuk', 'DL')->whereDate('created_at', $tanggal)->count('user_id');
-        $this->yang_izin = Absensi::where('jam_masuk', 'I')->whereDate('created_at', $tanggal)->count('user_id');
+        $this->yang_sakit = Absensi::where('jam_masuk', 'S')->whereDate('tanggal', $tanggal)->count('user_id');
+        $this->yang_dinas_luar = Absensi::where('jam_masuk', 'DL')->whereDate('tanggal', $tanggal)->count('user_id');
+        $this->yang_izin = Absensi::where('jam_masuk', 'I')->whereDate('tanggal', $tanggal)->count('user_id');
 
         $this->totalPegawai = User::where('role', 'user')->count();
-        $this->sudahAbsenMasuk = Absensi::whereDate('created_at', $tanggal)->whereRaw('LENGTH(jam_masuk) > 3')->count('user_id') + $this->yang_sakit + $this->yang_dinas_luar + $this->yang_izin;
+        $this->sudahAbsenMasuk = Absensi::whereDate('tanggal', $tanggal)->whereRaw('LENGTH(jam_masuk) > 3')->count('user_id') + $this->yang_sakit + $this->yang_dinas_luar + $this->yang_izin;
         $this->belumAbsenMasuk = $this->totalPegawai - $this->sudahAbsenMasuk;
-        $this->sudahAbsenPulang = Absensi::whereDate('created_at', $tanggal)->where('jam_pulang', '<>', '0')->count('user_id');
+        $this->sudahAbsenPulang = Absensi::whereDate('tanggal', $tanggal)->where('jam_pulang', '<>', '0')->count('user_id');
         $this->belumAbsenPulang = $this->totalPegawai - $this->sudahAbsenPulang;
     }
 
@@ -124,7 +124,7 @@ class DashboardAdminController extends Controller
         $tanggal = Carbon::now();
         $pegawaiHadir = Absensi::select('user_id')
             ->whereRaw('LENGTH(jam_masuk)>3')
-            ->whereDate('created_at', $tanggal)
+            ->whereDate('tanggal', $tanggal)
             ->get();
         // dd($pegawaiHadir);                                
         return $pegawaiHadir;
@@ -135,7 +135,7 @@ class DashboardAdminController extends Controller
         $tanggal = Carbon::now();
         $pegawaiIzin = Absensi::select('user_id')
             ->where('jam_masuk', 'I')
-            ->whereDate('created_at', $tanggal)
+            ->whereDate('tanggal', $tanggal)
             ->get();
 
         return $pegawaiIzin;
@@ -146,7 +146,7 @@ class DashboardAdminController extends Controller
         $tanggal = Carbon::now();
         $pegawaiSakit = Absensi::select('user_id')
             ->where('jam_masuk', 'S')
-            ->whereDate('created_at', $tanggal)
+            ->whereDate('tanggal', $tanggal)
             ->get();
 
         return $pegawaiSakit;
@@ -157,7 +157,7 @@ class DashboardAdminController extends Controller
         $tanggal = Carbon::now();
         $pegawaiDL = Absensi::select('user_id')
             ->where('jam_masuk', 'DL')
-            ->whereDate('created_at', $tanggal)
+            ->whereDate('tanggal', $tanggal)
             ->get();
 
         return $pegawaiDL;
@@ -169,7 +169,7 @@ class DashboardAdminController extends Controller
         $pegawaiBH = array();
         $allUser = User::select('id', 'name')->where('role', 'user')->orderBy('name')->get();
         foreach ($allUser as $au) {
-            $data = Absensi::where('user_id', $au['id'])->whereDate('created_at', $tanggal)->get();
+            $data = Absensi::where('user_id', $au['id'])->whereDate('tanggal', $tanggal)->get();
             if (blank($data)) {
                 $pegawaiBH[] = $au['name'];
             }

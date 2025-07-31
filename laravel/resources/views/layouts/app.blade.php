@@ -19,7 +19,7 @@
   <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}" />
   <style>
   .text-logo {
-      color: #00A693;
+      color: #f14e4eff;
       font-weight: bold;
     }
   </style>

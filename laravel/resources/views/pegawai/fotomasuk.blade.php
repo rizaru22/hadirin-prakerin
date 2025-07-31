@@ -85,13 +85,14 @@
         </div>
     </div>
 </div>
+
 @endsection
 @section('script')
 <script src="{{asset('dist/js/webcam.js')}}"></script>
 <script src="{{asset('dist/js/absen.js')}}"></script>
 <script language="JavaScript">
-       let latSMK1 = {{$pengaturan[0]->latitude}};
-       let longSMK1 = {{$pengaturan[0]->longitude}};
+       let latSMK1 = {{$latitude}};
+       let longSMK1 = {{$longitude}};
        let jarak_maksimal={{$pengaturan[0]->jarak_maksimal}}
 
     @if($errors->any())

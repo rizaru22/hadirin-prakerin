@@ -3,10 +3,10 @@
 
 <head>
     <!-- Required meta tags -->
-    <meta name="theme-color" content="#00A693">
-    <meta name="msapplication-TileColor" content="#00A693">
-    <meta name="msapplication-navbutton-color" content="#00A693">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#00A693">
+    <meta name="theme-color" content="#f14e4eff">
+    <meta name="msapplication-TileColor" content="#f14e4eff">
+    <meta name="msapplication-navbutton-color" content="#f14e4eff">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#f14e4eff">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name=”robots” content="index, follow">
@@ -49,7 +49,7 @@
                         </a>
                     </div>
                     <div class="p-2">
-                        <a href="https://www.google.com/maps/?q={{ $pengaturan[0]->latitude }},{{ $pengaturan[0]->longitude }}"
+                        <a href="https://www.google.com/maps/?q={{ $latitude }},{{ $longitude }}"
                             class="item" target="_blank"><button class="btn btn-outline-success">
                                 <i class="fas  fa-map-marker-alt"></i></button><br><span>Lokasi</span>
                         </a>
@@ -60,8 +60,8 @@
                     <div class="p-2">
                         <form action="{{route('logout')}}" method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-outline-danger"><i
-                                    class="fas fa-power-off"></i></button><br><span class="text-red">Logout</span>
+                            <button type="submit" class="btn btn-outline-primary"><i
+                                    class="fas fa-power-off"></i></button><br><span class="text-primary">Logout</span>
                         </form>
                     </div>
                 </div>

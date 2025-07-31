@@ -7,16 +7,17 @@
   } */
 
 :root{
-    --warna-hijau:#00A693;
+    --warna-hijau:#f14e4eff;
     --warna-putih:#fff;
     --warna-biru:#0069a6;
     --warna-merah:#a61900;
+    --warna-success:#017026;
 }
 
 /* html{
     overflow: scroll;
     height: 100%;
-} */
+} */ 
 body{
     text-decoration: none; /* no underline */
     font-family: "Roboto",sans-serif;
@@ -158,11 +159,11 @@ padding-bottom: 15vh;
   }
 
 .card-red{
-    background-color: var(--warna-merah);
+    background-color: var(--warna-success);
     
 }
 .btn-red{
-    background-color: var(--warna-merah);
+    background-color: var(--warna-success);
     color: var(--warna-putih);
 }
 

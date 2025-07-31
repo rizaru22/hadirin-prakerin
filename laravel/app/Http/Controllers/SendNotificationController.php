@@ -23,7 +23,7 @@ class SendNotificationController extends Controller
             ->get()->toArray();
         foreach ($user as $us) {
             $nama = '';
-            $absensi = Absensi::select('jam_masuk')->where('user_id', $us['id'])->whereDate('created_at', $tanggal)->get();
+            $absensi = Absensi::select('jam_masuk')->where('user_id', $us['id'])->whereDate('tanggal', $tanggal)->get();
             if (blank($absensi)||$absensi[0]->jam_masuk == '0') {
                 $nama = "\r\n" . $no.'.'.$us['name'];
                 $no++;
@@ -49,7 +49,7 @@ class SendNotificationController extends Controller
             ->get()->toArray();
         foreach ($user as $us) {
             $nama = '';
-            $absensi = Absensi::select('jam_pulang')->where('user_id', $us['id'])->whereDate('created_at', $tanggal)->get()->toArray();
+            $absensi = Absensi::select('jam_pulang')->where('user_id', $us['id'])->whereDate('tanggal', $tanggal)->get()->toArray();
             // dd($absensi[0]->jam_pulang,$us['name'],$tanggal);
             if (blank($absensi)) {
                 $nama = "\r\n" . $no.'.'.$us['name'];

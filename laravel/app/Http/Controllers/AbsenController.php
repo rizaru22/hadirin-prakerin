@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Siswa;
 use App\Models\Absensi;
 use Illuminate\View\View;
 use App\Models\Pengaturan;
-use Illuminate\Http\Request;
 // use Intervention\Image\Image;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
@@ -28,6 +29,9 @@ class AbsenController extends Controller
             ->limit(1)
             ->get();
 
+        $siswa=Siswa::where('user_id',Auth::user()->id)->first();
+
+       
         $waktuMasuk = $Pengaturan[0]->jam_masuk;
         $waktuMaksimalMasuk = $Pengaturan[0]->jam_maksimal_masuk;
         $waktuPulang = $Pengaturan[0]->jam_pulang;
@@ -46,7 +50,11 @@ class AbsenController extends Controller
                 return redirect()->route('pegawai')->with('error', 'Anda sudah melakukan absensi/cuti');
             }
 
+            
+
             return view('pegawai.fotomasuk', [
+                "latitude" => $siswa->perusahaan->latitude,
+                "longitude" => $siswa->perusahaan->longitude,
                 "pengaturan" => Pengaturan::limit(1)->get()
             ]);
         } elseif ($jam_sekarang > $waktuPulang and $jam_sekarang < $waktuMaksimalPulang) {
@@ -54,13 +62,17 @@ class AbsenController extends Controller
             //cek apakah sudah melakukan absen pulang
             $cekAbsensi = Absensi::select("jam_pulang")
             ->where('user_id', '=', Auth::user()->id)
-            ->whereDate('created_at', Carbon::today())
+            ->whereDate('tanggal', Carbon::today())
             ->get();
             
             if (!blank($cekAbsensi) && $cekAbsensi[0]->jam_pulang != 0) {
                 return redirect()->route('pegawai')->with('error', 'Anda sudah melakukan absensi pulang');
             }
+
+           
             return view('pegawai.fotopulang', [
+                "latitude" => $siswa->perusahaan->latitude,
+                "longitude" => $siswa->perusahaan->longitude,
                 "pengaturan" => Pengaturan::limit(1)->get()
             ]);
         } elseif ($jam_sekarang < $waktuMasuk) {
@@ -96,7 +108,9 @@ class AbsenController extends Controller
 
         $validasi["user_id"] = Auth::user()->id;
         $validasi["jam_masuk"] = Carbon::now('Asia/Jakarta')->isoFormat('HH:mm:ss');
+        $validasi["tanggal"] = Carbon::now('Asia/Jakarta')->isoFormat('YYYY-MM-DD');
         $validasi["jam_pulang"] = "0";
+        
         $validasi["foto_pulang"] = "";
         $validasi['foto_masuk'] = 'fotomasuk/' . $fileName;
 
@@ -139,6 +153,7 @@ class AbsenController extends Controller
 
         if ($this->cekAbsensi()) {
             $absen = new Absensi;
+            $absen->tanggal = Carbon::now('Asia/Jakarta')->isoFormat('YYYY-MM-DD');
             $absen->jam_pulang = $validasi["jam_pulang"];
             $absen->foto_masuk = '-';
             $absen->jam_masuk = '0';
@@ -150,7 +165,7 @@ class AbsenController extends Controller
 
         $cekAbsensi = Absensi::select("jam_pulang")
             ->where('user_id', '=', Auth::user()->id)
-            ->whereDate('created_at', Carbon::today())
+            ->whereDate('tanggal', Carbon::today())
             ->get();
         // dd($cekAbsensi);
         if (!blank($cekAbsensi)) {
@@ -159,7 +174,7 @@ class AbsenController extends Controller
                 return redirect()->route('pegawai')->with('error', 'Anda sudah melakukan absensi pulang');
             } else {
 
-                Absensi::where('user_id', Auth::user()->id)->whereDate('created_at', Carbon::today())->update($validasi);
+                Absensi::where('user_id', Auth::user()->id)->whereDate('tanggal', Carbon::today())->update($validasi);
 
                 return redirect()->route('pegawai')->with('success', 'Anda berhasil melakukan absensi');
             }
@@ -192,6 +207,7 @@ class AbsenController extends Controller
         }
 
         $validasi["user_id"] = Auth::user()->id;
+        $validasi["tanggal"] = Carbon::now('Asia/Jakarta')->isoFormat('YYYY-MM-DD');
         $validasi["jam_pulang"] = $validasi['jam_masuk'];
         $validasi["foto_masuk"] = '-';
         $validasi["foto_pulang"] = '-';
@@ -211,7 +227,7 @@ class AbsenController extends Controller
         //query untuk mengambil data user apakah sudah pernah melakukan absensi masuk hari ini
         $cekAbsensi = Absensi::select("id")
             ->where('user_id', '=', Auth::user()->id)
-            ->whereDate('created_at', Carbon::today())
+            ->whereDate('tanggal', Carbon::today())
             ->get();
 
 

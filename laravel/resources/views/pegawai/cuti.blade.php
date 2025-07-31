@@ -25,7 +25,7 @@
                 <option value="S">Sakit</option>
               </select>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-2">
               <label for="foto_izin">Bukti Dukung</label>
               <input type="file" id="foto_izin" class="form-control-file" name="foto_izin" accept="image/*"  />
             </div>

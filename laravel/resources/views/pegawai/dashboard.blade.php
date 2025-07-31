@@ -4,12 +4,9 @@
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
 
 @endsection
-@section('title','HadirIn')
+@section('title','SiHadirIn')
 
 @section('konten')
-
-
-
     <div id="body">
         <header>
             <div class="container-fluid">
@@ -24,7 +21,7 @@
                 </div>
                 <div class="d-flex flex-row justify-content-center">
                     <div class="p-1">
-                        <h3>{{$pengaturan[0]->nama_instansi}}</h3>
+                        <h5>IDUKA: {{($perusahaan)}}</h5>
                     </div>
                 </div>
             </div>
@@ -44,7 +41,7 @@
 
                                     <div class="ps-3 pe-3">
                                         <a href="{{ route('absen') }}" class="d-flex flex-column align-items-center">
-                                            <button class="btn btn-danger btn-red btn-lg">
+                                            <button class="btn btn-success btn-red btn-lg">
                                                 <i class="fas fa-camera"></i>
                                             </button>
                                             <span class="text-black">{{$nama_tombol}}</span>
@@ -122,7 +119,7 @@
                                 @foreach($dataAbsen as $item)
                                 @foreach($item as $subItem)
                                 <tr>
-                                    <td class="align-middle">{{ $daftar_hari[date('l',strtotime($subItem['created_at']))] }}</td>
+                                    <td class="align-middle">{{ $daftar_hari[date('l',strtotime($subItem['tanggal']))] }}</td>
                                     <td class="align-middle">{{ $subItem['jam_masuk'] }}</td>
                                     <td class="align-middle">{{ $subItem['jam_pulang'] }}</td>
 
@@ -175,7 +172,7 @@
 
 
         @if($message = Session::get('error'))
-        toastr.error("{{ $message}}");
+        toastr.warning("{{ $message}}");
         @elseif($message = Session::get('success'))
         toastr.success("{{ $message}}");
         @endif

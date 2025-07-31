@@ -223,7 +223,7 @@
         
     </div>
     <div class="card-body">
-        <table id="example2" class="table table-bordered table-striped dataTable dtr-inline collapsed table-hover">
+        <table id="example1" class="table table-bordered table-striped dataTable dtr-inline collapsed table-hover">
             <thead>
                 <tr>
                     <th>No</th>
@@ -247,17 +247,17 @@
                     <td>
                         @if($subdah['foto_masuk']=='-' or $subdah['foto_masuk']=='0' or $subdah['foto_masuk']=='')
                         @else
-                        <img src="{{asset('storage/'.$subdah['foto_masuk'])}}" width="150" alt="Foto Masuk" style="border: 2px solid green; ">
+                        <img src="{{asset('storage/'.$subdah['foto_masuk'])}}" width="100" alt="Foto Masuk" style="border: 2px solid green; ">
                         @endif
                         @if($subdah['foto_pulang']=='-' or $subdah['foto_pulang']=='0' or $subdah['foto_pulang']=='')
                         @else
                         
-                        <img src="{{asset('storage/'.$subdah['foto_pulang'])}}" width="150" alt="Foto Pulang" style="border: 2px solid blue; " > 
+                        <img src="{{asset('storage/'.$subdah['foto_pulang'])}}" width="100" alt="Foto Pulang" style="border: 2px solid blue; " > 
                         @endif
                         @if($subdah['foto_izin']=='-' or $subdah['foto_izin']=='0' or $subdah['foto_izin']=='')
                         @else
                         
-                        <img src="{{asset('storage/'.$subdah['foto_izin'])}}" width="150" alt="Foto Izin" style="border: 2px solid yellow; ">
+                        <img src="{{asset('storage/'.$subdah['foto_izin'])}}" width="100" alt="Foto Izin" style="border: 2px solid yellow; ">
                         @endif
                     </td>
 
@@ -313,6 +313,8 @@
             "info": true,
             "autoWidth": false,
             "responsive": true,
+      
+           
         });
         $('#daftarHadir').DataTable({
           "responsive":true,

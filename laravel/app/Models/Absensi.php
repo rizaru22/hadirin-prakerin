@@ -13,6 +13,7 @@ class Absensi extends Model
 
     protected $fillable=[
         'user_id',
+        'tanggal',
         'jam_masuk',
         'jam_pulang',
         'foto_masuk',

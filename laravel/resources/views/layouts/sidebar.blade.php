@@ -2,7 +2,7 @@
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
         <img src="{{ asset('img/favicon-32x32.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-            style="opacity: .8"><span class="brand-text ">Hadir<span class="text-logo">In</span></span>
+            style="opacity: .8"><span class="brand-text "><span class="text-logo">Si</span>Hadir<span class="text-logo">In</span></span>
     </a>
 
     <!-- Sidebar -->

@@ -3,10 +3,10 @@
 
 <head>
   <!-- Required meta tags -->
-  <meta name="theme-color" content="#00A693">
-  <meta name="msapplication-TileColor" content="#00A693">
-  <meta name="msapplication-navbutton-color" content="#00A693">
-  <meta name="apple-mobile-web-app-status-bar-style" content="#00A693">
+  <meta name="theme-color" content="#f14e4eff">
+  <meta name="msapplication-TileColor" content="#f14e4eff">
+  <meta name="msapplication-navbutton-color" content="#f14e4eff">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#f14e4eff">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name=”robots” content="index, follow">
@@ -27,17 +27,17 @@
   <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}" />
   <style>
     .btn-primary {
-      background-color: #00A693 !important;
-      border-color: #00A693 !important;
+      background-color: #f14e4eff !important;
+      border-color: #f14e4eff !important;
     }
 
     .text-logo {
-      color: #00A693;
+      color: #f14e4eff;
       font-weight: bold;
     }
 
     .card-primary.card-outline {
-      border-top: 3px solid #00A693 !important;
+      border-top: 3px solid #f14e4eff !important;
     }
   </style>
   <title>Login Hadirin</title>
@@ -63,7 +63,7 @@
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
-        <h3> <img src="{{asset('img/apple-touch-icon.png')}}" alt="" width="50" height="50"> Hadir<span class="text-logo">In</span></h3>
+        <h3> <img src="{{asset('img/apple-touch-icon.png')}}" alt="" width="50" height="50"><span class="text-logo">Si</span>Hadir<span class="text-logo">In</span></h3>
       </div>
       <div class="card-body login-card-body">
 

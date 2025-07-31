@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Siswa;
 use App\Models\Absensi;
 use Carbon\CarbonPeriod;
 use Illuminate\View\View;
@@ -25,15 +26,15 @@ class DashboardPegawaiController extends Controller
         $jamKerjaPerHari=0;
         $jamKerjaPerMinggu=0;
         foreach ($period as $date) {
-            $data= Absensi::select('created_at', 'jam_masuk', 'jam_pulang')
-                ->whereDate('created_at', $date)
+            $data= Absensi::select('tanggal', 'jam_masuk', 'jam_pulang')
+                ->whereDate('tanggal', $date)
                 ->where('user_id', Auth::user()->id)
                 ->get()
                 ->toArray();
 
                 if($data==null){
                     $data=array([
-                        'created_at'=>$date->toDateTimeString(),
+                        'tanggal'=>$date->toDateTimeString(),
                         'jam_masuk'=>'0',
                         'jam_pulang'=>'0',
                     ]);
@@ -57,7 +58,7 @@ class DashboardPegawaiController extends Controller
   
 
         $jam_masuk_hari_ini=Absensi::select('jam_masuk')
-            ->whereDate('created_at', Carbon::now('Asia/Jakarta')->toDateString())
+            ->whereDate('tanggal', Carbon::now('Asia/Jakarta')->toDateString())
             ->where('user_id', Auth::user()->id)
             ->get()
             ->toArray();
@@ -70,7 +71,7 @@ class DashboardPegawaiController extends Controller
 
 
         $jam_pulang_hari_ini = Absensi::select('jam_pulang')
-            ->whereDate('created_at', Carbon::now('Asia/Jakarta')->toDateString())
+            ->whereDate('tanggal', Carbon::now('Asia/Jakarta')->toDateString())
             ->where('user_id', Auth::user()->id)
             ->get()
             ->toArray();
@@ -100,9 +101,14 @@ class DashboardPegawaiController extends Controller
             $nama_tombol="Belum";
         }
 
+        $siswa=Siswa::where('user_id', Auth::user()->id)->first();
         return view('pegawai.dashboard', [
             "tanggal" => $tanggal,
+            "siswa" => $siswa,
             "pengaturan" => $pengaturan,
+            "latitude" => $siswa->perusahaan->latitude,
+            "longitude" => $siswa->perusahaan->longitude,
+            "perusahaan"=>$siswa->perusahaan->nama_perusahaan,
             "dataAbsen" => $dataAbsen,
             "jamKerjaPerMinggu"=>$stringJamKerjaPerMinggu,
             "jamPulangHariIni" => $jamPulangHariIni,
@@ -124,7 +130,7 @@ class DashboardPegawaiController extends Controller
 
     public function lihatAkun(): View
     {
-        $dataUser = User::select('name', 'nip', 'username', 'email')->where('id', Auth::user()->id)->get();
+        $dataUser = User::select('name', 'username', 'email')->where('id', Auth::user()->id)->get();
         // dd($dataUser[0]);
         return view('pegawai.akun', [
             "data" => $dataUser[0],

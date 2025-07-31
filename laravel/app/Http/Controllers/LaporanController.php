@@ -23,13 +23,13 @@ class LaporanController extends Controller
     {
         $data = Absensi::select('absensis.id as idabsen','users.id', 'users.name', 'absensis.jam_masuk', 'absensis.jam_pulang', 'absensis.foto_masuk', 'absensis.foto_pulang', 'absensis.foto_izin')
             ->join('users', 'absensis.user_id', '=', 'users.id')
-            ->whereDate('absensis.created_at', $tanggal)
+            ->whereDate('absensis.tanggal', $tanggal)
             ->where('user_id', $id)
             ->get()->toArray();
 
         // $data=Absensi::with('user')
         //             ->where('user_id',$id)
-        //             ->whereDate('created_at',$tanggal)
+        //             ->whereDate('tanggal',$tanggal)
         //             ->get()->toArray();
         // dd($data);
         
@@ -119,7 +119,7 @@ class LaporanController extends Controller
                 
                 $data = Absensi::select('jam_masuk', 'jam_pulang')
                     ->where('user_id', $au['id'])
-                    ->whereDate('created_at', $date)
+                    ->whereDate('tanggal', $date)
                     ->get()->toArray();
                 if (!blank($data)) {
                     $data_absen_per_orang[] = $data[0];
@@ -192,7 +192,7 @@ class LaporanController extends Controller
             foreach ($period as $date) {
                 $data = Absensi::select('jam_masuk', 'jam_pulang')
                     ->where('user_id', $au['id'])
-                    ->whereDate('created_at', $date)
+                    ->whereDate('tanggal', $date)
                     ->get()->toArray();
                 if (!blank($data)) {
                     $data_absen_per_orang[] = $data[0];
@@ -237,7 +237,7 @@ class LaporanController extends Controller
             foreach ($period as $date) {
                 $data = Absensi::select('jam_masuk', 'jam_pulang')
                     ->where('user_id', $au['id'])
-                    ->whereDate('created_at', $date)
+                    ->whereDate('tanggal', $date)
                     ->get()->toArray();
 
                     if (!blank($data)) {
@@ -314,9 +314,9 @@ class LaporanController extends Controller
 {
 
     $this->totalPegawai=User::where('role','user')->count();
-    $this->sudahAbsenMasuk=Absensi::whereDate('created_at',$tanggal)->count('user_id');
+    $this->sudahAbsenMasuk=Absensi::whereDate('tanggal',$tanggal)->count('user_id');
     $this->belumAbsenMasuk=$this->totalPegawai-$this->sudahAbsenMasuk;
-    $this->sudahAbsenPulang=Absensi::whereDate('created_at',$tanggal)->where('jam_pulang','<>','0')->count('user_id');
+    $this->sudahAbsenPulang=Absensi::whereDate('tanggal',$tanggal)->where('jam_pulang','<>','0')->count('user_id');
     $this->belumAbsenPulang=$this->totalPegawai-$this->sudahAbsenPulang;
 }
 
@@ -324,7 +324,7 @@ public function summaryHadir($tanggal){
     
     $pegawaiHadir=Absensi::select('user_id')
                                 ->whereRaw('LENGTH(jam_masuk)>3')
-                                ->whereDate('created_at',$tanggal)
+                                ->whereDate('tanggal',$tanggal)
                                 ->get();
     // dd($pegawaiHadir);                                
     return $pegawaiHadir;
@@ -334,7 +334,7 @@ public function summaryIzin($tanggal){
 
     $pegawaiIzin=Absensi::select('user_id')
                                 ->where('jam_masuk','I')
-                                ->whereDate('created_at',$tanggal)
+                                ->whereDate('tanggal',$tanggal)
                                 ->get();
     
     return $pegawaiIzin;
@@ -344,7 +344,7 @@ public function summarySakit($tanggal){
 
     $pegawaiSakit=Absensi::select('user_id')
                                 ->where('jam_masuk','S')
-                                ->whereDate('created_at',$tanggal)
+                                ->whereDate('tanggal',$tanggal)
                                 ->get();
     
     return $pegawaiSakit;
@@ -354,7 +354,7 @@ public function summaryDinasLuar($tanggal){
 
     $pegawaiDL=Absensi::select('user_id')
                                 ->where('jam_masuk','DL')
-                                ->whereDate('created_at',$tanggal)
+                                ->whereDate('tanggal',$tanggal)
                                 ->get();
     
     return $pegawaiDL;
@@ -365,7 +365,7 @@ public function summaryBelumHadir($tanggal){
     $pegawaiBH=array();
     $allUser=User::select('id','name')->where('role','user')->orderBy('name')->get();
     foreach($allUser as $au){
-        $data=Absensi::where('user_id',$au['id'])->whereDate('created_at',$tanggal)->get();
+        $data=Absensi::where('user_id',$au['id'])->whereDate('tanggal',$tanggal)->get();
         if(blank($data)){
             $pegawaiBH[]=$au['name'];
         }

@@ -28,19 +28,16 @@
                             <label for="name">Nama</label>
                             <input type="text" id="name" name="name" class="form-control" value="{{$data->name}}" disabled>
                         </div>
-                        <div class="form-group">
-                            <label for="nip">NIP</label>
-                            <input type="text" id="nip" name="nip" class="form-control" disabled value="{{$data->nip}}">
-                        </div>
-                        <div class="form-group">
+                     
+                        <div class="form-group mt-2">
                             <label for="email">Email</label>
                             <input type="email" id="email" name="email" class="form-control" disabled value="{{$data->email}}">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mt-2">
                             <label for="username">Username</label>
                             <input type="text" id="username" name="username" class="form-control" disabled value="{{$data->username}}">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mt-2">
                             <label for="password ">Password</label>
                             <input type="password" id="password" name="password" class="form-control" required>
                         </div>
