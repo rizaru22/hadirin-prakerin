@@ -7,7 +7,7 @@
   <div class="row">
     <div class="col-12">
       <div class="card mt-4">
-        <div class="card-header text-bg-success">
+        <div class="card-header text-bg-danger">
           Pilih Jenis Izin dan Kirim Bukti Dukung
         </div>
         <div class="card-body">

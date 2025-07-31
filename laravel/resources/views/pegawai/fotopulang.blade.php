@@ -47,12 +47,12 @@
     <div class="jarak">
         <div class="jarak-terlalu-jauh">
             <div class="alert alert-danger" role="alert">
-                <h4 class="alert-heading">Anda terlalu jauh dari sekolah!</h4>
-                <p>Anda harus berada dalam jarak {{$pengaturan[0]->jarak_maksimal}} meter dari sekolah, saat ini GPS menunjukkan anda berada <strong> <span id="jarak"></span> meter </strong>dari sekolah</p>
+                <h4 class="alert-heading">Anda terlalu jauh dari koordinat yang ditentukan!</h4>
+                <p>Anda harus berada dalam jarak {{$pengaturan[0]->jarak_maksimal}} meter dari koordinat yang ditentukan, saat ini GPS menunjukkan anda berada <strong> <span id="jarak"></span> meter </strong>dari titik koordinat</p>
                 <hr>
                 <ol>
                     <li>Pastikan GPS Anda aktif</li>
-                    <li>Periksa kembali lokasi anda  <a href="https://www.google.com/maps/?q={{ $pengaturan[0]->latitude }},{{ $pengaturan[0]->longitude }}"  target="_blank" class="btn btn-sm btn-primary">DISINI</a></li>
+                    <li>Periksa kembali lokasi anda  <a href="https://www.google.com/maps/?q={{ $latitude }},{{ $longitude }}"  target="_blank" class="btn btn-sm btn-primary">DISINI</a></li>
                     <li>Setelah memastikan lokasi anda pada GPS, silahkan <a href="{{route('pegawai')}}" class="btn btn-sm btn-success">ULANGI</a> lagi proses Absen </li>
                     <li>Periksa kembali jaringan internet anda</li>
                     <li>Jika masalah masih berlanjut, coba restart perangkat anda</li>

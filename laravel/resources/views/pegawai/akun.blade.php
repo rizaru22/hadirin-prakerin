@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-12">
             <div class="card mt-4 ">
-                <div class="card-header text-bg-success">
+                <div class="card-header text-bg-danger">
                     Formulir Ubah Password
                     @if ($errors->any())
                     <div class="alert alert-danger">
