@@ -20,8 +20,8 @@ class ImportUserController extends Controller
     //
     public function index():View
     {
-        return view('admin.user.upload',[
-            "title"=>"Pegawai",
+        return view('admin.siswa.upload',[
+            "title"=>"Siswa",
         ]);
     }
 
@@ -48,11 +48,16 @@ class ImportUserController extends Controller
                 $user=new User;
                 $user->name=$dt['nama'];
                 $user->username=strstr($dt['email'],'@',true);
-                $user->nip=$dt['nip'];
                 $user->email=$dt['email'];
                 $user->password=Hash::make('1234');
                 $user->role='user';
                 $user->save();
+
+                $siswa=new \App\Models\Siswa;
+                $siswa->user_id=$user->id;
+                $siswa->nama_siswa=$dt['nama'];
+                $siswa->kelas=$dt['kelas'];
+                $siswa->save();
             }
         }
         return redirect()->route('pengguna.index')->with('success','Berhasil Import Data Pengguna');

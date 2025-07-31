@@ -12,7 +12,7 @@
             background-color: #3D9970;
         }
     </style>
-@endsection
+@endsection 
 @section('namaHalaman','Daftar Siswa')
 @section('konten')
 <div class="card">

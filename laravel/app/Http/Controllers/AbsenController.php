@@ -182,11 +182,14 @@ class AbsenController extends Controller
     }
     public function izin()
     {
+         $siswa=Siswa::where('user_id',Auth::user()->id)->first();
 
         if ($this->cekAbsensi() == false) {
             return redirect()->route('pegawai')->with('error', 'Anda sudah melakukan absensi/cuti');
         }
         return view('pegawai.cuti', [
+              "latitude" => $siswa->perusahaan->latitude,
+                "longitude" => $siswa->perusahaan->longitude,
             "pengaturan" => Pengaturan::limit(1)->get()
         ]);
     }

@@ -122,8 +122,10 @@ class DashboardPegawaiController extends Controller
     public function faq()
     {
         $data=Pengaturan::all();
-
+        $siswa=Siswa::where('user_id',Auth::user()->id)->first();
         return view('pegawai.faq',[
+            "latitude" => $siswa->perusahaan->latitude,
+            "longitude" => $siswa->perusahaan->longitude,
             "pengaturan"=>$data
         ]);
     }
@@ -132,8 +134,11 @@ class DashboardPegawaiController extends Controller
     {
         $dataUser = User::select('name', 'username', 'email')->where('id', Auth::user()->id)->get();
         // dd($dataUser[0]);
+        $siswa=Siswa::where('user_id',Auth::user()->id)->first();
         return view('pegawai.akun', [
             "data" => $dataUser[0],
+            "latitude" => $siswa->perusahaan->latitude,
+            "longitude" => $siswa->perusahaan->longitude,
             "pengaturan"=> Pengaturan::limit(1)->get()
         ]);
     }
