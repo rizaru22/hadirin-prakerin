@@ -12,7 +12,7 @@ class SiswaController extends Controller
     public function index(){
         return view('admin.siswa.index',[
             "title"=>"Siswa",
-            "siswa" => \App\Models\Siswa::all(),
+            "siswa" => \App\Models\Siswa::all()->sortBy([['kelas','asc'],['nama_siswa','asc']]),
         ]);
     }
 
