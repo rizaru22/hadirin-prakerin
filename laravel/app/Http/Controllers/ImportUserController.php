@@ -56,10 +56,11 @@ class ImportUserController extends Controller
                 $siswa=new \App\Models\Siswa;
                 $siswa->user_id=$user->id;
                 $siswa->nama_siswa=$dt['nama'];
+                $siswa->perusahaan_id='1';
                 $siswa->kelas=$dt['kelas'];
                 $siswa->save();
             }
         }
-        return redirect()->route('pengguna.index')->with('success','Berhasil Import Data Pengguna');
+        return redirect()->route('siswa.index')->with('success','Berhasil Import Data Siswa');
     }
 }

@@ -40,7 +40,7 @@
       border-top: 3px solid #f14e4eff !important;
     }
   </style>
-  <title>Login Hadirin</title>
+  <title>SiHadirIn</title>
 </head>
 
 <body class="hold-transition login-page">
