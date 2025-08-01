@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Libur;
+use App\Models\Siswa;
 use App\Models\Absensi;
 use App\Models\Pengaturan;
 use Hamcrest\Type\IsBoolean;
@@ -18,14 +19,15 @@ class SendNotificationController extends Controller
         $no = 1;
         $nama2 = '';
         $tanggal = Carbon::now();
-        $user = User::select('id', 'name')
-            ->where('role', 'user')->orderBy('name')
+        $user = Siswa::select('user_id', 'nama_siswa','kelas')
+            ->orderBy('kelas', 'asc')
+            ->orderBy('nama_siswa', 'asc')
             ->get()->toArray();
         foreach ($user as $us) {
             $nama = '';
-            $absensi = Absensi::select('jam_masuk')->where('user_id', $us['id'])->whereDate('tanggal', $tanggal)->get();
+            $absensi = Absensi::select('jam_masuk')->where('user_id', $us['user_id'])->whereDate('tanggal', $tanggal)->get();
             if (blank($absensi)||$absensi[0]->jam_masuk == '0') {
-                $nama = "\r\n" . $no.'.'.$us['name'];
+                $nama = "\r\n" . $no.'.'.$us['nama_siswa'].'('.$us['kelas'].')';
                 $no++;
             }
 
@@ -44,18 +46,19 @@ class SendNotificationController extends Controller
         $nama2 = '';
         $tanggal = Carbon::now();
 
-        $user = User::select('id', 'name')
-            ->where('role', 'user')->orderBy('name')
+        $user = Siswa::select('user_id', 'nama_siswa','kelas')
+            ->orderBy('kelas', 'asc')
+            ->orderBy('nama_siswa', 'asc')
             ->get()->toArray();
         foreach ($user as $us) {
             $nama = '';
-            $absensi = Absensi::select('jam_pulang')->where('user_id', $us['id'])->whereDate('tanggal', $tanggal)->get()->toArray();
+            $absensi = Absensi::select('jam_pulang')->where('user_id', $us['user_id'])->whereDate('tanggal', $tanggal)->get()->toArray();
             // dd($absensi[0]->jam_pulang,$us['name'],$tanggal);
             if (blank($absensi)) {
-                $nama = "\r\n" . $no.'.'.$us['name'];
+                $nama = "\r\n" . $no.'.'.$us['nama_siswa'].'('.$us['kelas'].')';
                 $no++;
             } elseif ($absensi[0]['jam_pulang'] == '0') {
-                $nama = "\r\n" . $no.'.'.$us['name'];
+                $nama = "\r\n" . $no.'.'.$us['nama_siswa'].'('.$us['kelas'].')';
                 $no++;
             }
 
