@@ -17,7 +17,7 @@
     <div class="row ">
         <div class="col-12 justify-content-center">
             <div class="peringatan text-center alert alert-success mt-2">
-                <h5>Foto harus menampilkan wajah dan latar belakang sekolah</h5>
+                <h5>Foto harus menampilkan wajah dan latar belakang kantor</h5>
             </div>
 
             <form action="{{ route('kirimfotomasuk') }}" method="post" name="kirim_foto" id="kirim_foto">
@@ -35,7 +35,7 @@
             <!-- <div id="results" class="webcam-capture" style="width: 590px; height:460px">Foto Anda</div> -->
             <div class="text-center mx-auto">
 
-                <button type="button" class="btn btn-success btn-lg rounded-circle shadow mb-3 p-3 rouded pt-3 pb-3 border-dark rounded-lg" onclick="ambil_foto()"><i class="fas fa-camera fa-2x"></i></button>
+                <button type="button" class="btn btn-danger btn-lg rounded-circle shadow mb-3 p-3 rouded pt-3 pb-3 border-dark rounded-lg" onclick="ambil_foto()"><i class="fas fa-camera fa-2x"></i></button>
             </div>
 
         </div>
