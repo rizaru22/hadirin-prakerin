@@ -24,7 +24,7 @@
     @endif
 <div class="card card-success">
     <div class="card-header">
-        <h3 class="card-title">Tambah Data Pegawai</h3>
+        <h3 class="card-title">Tambah Data Admin</h3>
     </div>
     <div class="card-body">
 
@@ -32,7 +32,7 @@
             @csrf
             <div class="form-group">
                 <label for="nama_siswa">Nama Lengkap Siswa:</label>
-                <input type="text" class="form-control" id="nama_siswa" name="nama_siswa" placeholder="Nama Lengkap" required>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Nama Lengkap" required>
             </div>
 
             <div class="form-group">

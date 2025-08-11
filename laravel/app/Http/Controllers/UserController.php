@@ -23,7 +23,7 @@ class UserController extends Controller
         return view('admin.user.create',[
             "title"=>"Pegawai"
         ]);
-    }
+    } 
 
     public function store(Request $request):RedirectResponse{
         $request->validate([

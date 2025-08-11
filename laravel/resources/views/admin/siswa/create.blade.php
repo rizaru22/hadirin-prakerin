@@ -11,7 +11,7 @@
         }
     </style>
 @endsection
-@section('namaHalaman', 'Tambah Data Pegawai')
+@section('namaHalaman', 'Tambah Data Siswa')
 @section('konten')
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -25,7 +25,7 @@
     @endif
     <div class="card card-success">
         <div class="card-header">
-            <h3 class="card-title">Tambah Data Pegawai</h3>
+            <h3 class="card-title">Tambah Data Siswa</h3>
         </div>
         <div class="card-body">
 

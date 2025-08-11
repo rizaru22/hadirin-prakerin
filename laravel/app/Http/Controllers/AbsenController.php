@@ -84,7 +84,7 @@ class AbsenController extends Controller
         }
     }
 
-
+    //Fungsi kirimfotomasuk adalah untuk ....
     public function kirimfotomasuk(Request $request): RedirectResponse
     {
         // dd(public_path(''));
