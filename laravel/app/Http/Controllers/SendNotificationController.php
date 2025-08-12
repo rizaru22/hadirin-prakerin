@@ -28,7 +28,7 @@ class SendNotificationController extends Controller
             $nama = '';
             $absensi = Absensi::select('jam_masuk')->where('user_id', $us['user_id'])->whereDate('tanggal', $tanggal)->get();
             if (blank($absensi)||$absensi[0]->jam_masuk == '0') {
-                $nama = "\r\n" . $no.'.'.$us['nama_siswa'].'-'.$us['kelas'].'-'.$us['nama_perusahaan'];
+                $nama = "\r\n" . $no.'.'.$us['nama_siswa'].'-'.$us['nama_perusahaan'];
                 $no++;
             }
             
@@ -58,10 +58,10 @@ class SendNotificationController extends Controller
             ->where('user_id', $us['user_id'])->whereDate('tanggal', $tanggal)->get()->toArray();
             // dd($absensi[0]->jam_pulang,$us['name'],$tanggal);
             if (blank($absensi)) {
-                $nama = "\r\n" . $no.'.'.$us['nama_siswa'].'-'.$us['kelas'].'-'.$us['nama_perusahaan'];
+                $nama = "\r\n" . $no.'.'.$us['nama_siswa'].'-'.$us['nama_perusahaan'];
                 $no++;
             } elseif ($absensi[0]['jam_pulang'] == '0') {
-                $nama = "\r\n" . $no.'.'.$us['nama_siswa'].'-'.$us['kelas'].'-'.$us['nama_perusahaan'];
+                $nama = "\r\n" . $no.'.'.$us['nama_siswa'].'-'.$us['nama_perusahaan'];
                 $no++;
             }
 
