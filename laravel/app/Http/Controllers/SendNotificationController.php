@@ -19,7 +19,8 @@ class SendNotificationController extends Controller
         $no = 1;
         $nama2 = '';
         $tanggal = Carbon::now();
-        $user = Siswa::select('user_id', 'nama_siswa','kelas')
+        $user = Siswa::select('user_id', 'nama_siswa','kelas','nama_perusahaan')
+            ->join('perusahaans', 'perusahaans.id', '=', 'siswas.perusahaan_id')
             ->orderBy('kelas', 'asc')
             ->orderBy('nama_siswa', 'asc')
             ->get()->toArray();
@@ -27,38 +28,40 @@ class SendNotificationController extends Controller
             $nama = '';
             $absensi = Absensi::select('jam_masuk')->where('user_id', $us['user_id'])->whereDate('tanggal', $tanggal)->get();
             if (blank($absensi)||$absensi[0]->jam_masuk == '0') {
-                $nama = "\r\n" . $no.'.'.$us['nama_siswa'].'('.$us['kelas'].')';
+                $nama = "\r\n" . $no.'.'.$us['nama_siswa'].'-'.$us['kelas'].'-'.$us['nama_perusahaan'];
                 $no++;
             }
-
+            
             $nama2 .= $nama;
-           
+            
         }
-
+        
         if ($this->cek_hari_libur()==false){
-        $this->apiPesan("Belum Absen Masuk " . $tanggal->isoFormat('DD MMMM Y') . ': ' . $nama2);
+            $this->apiPesan("Belum Absen Masuk " . $tanggal->isoFormat('DD MMMM Y') . ': ' . $nama2);
         }
     }
-
+    
     public function notifikasiPulang()
     {
         $no = 1;
         $nama2 = '';
         $tanggal = Carbon::now();
-
-        $user = Siswa::select('user_id', 'nama_siswa','kelas')
+        
+       $user = Siswa::select('user_id', 'nama_siswa','kelas','nama_perusahaan')
+            ->join('perusahaans', 'perusahaans.id', '=', 'siswas.perusahaan_id')
             ->orderBy('kelas', 'asc')
             ->orderBy('nama_siswa', 'asc')
             ->get()->toArray();
         foreach ($user as $us) {
             $nama = '';
-            $absensi = Absensi::select('jam_pulang')->where('user_id', $us['user_id'])->whereDate('tanggal', $tanggal)->get()->toArray();
+            $absensi = Absensi::select('jam_pulang')
+            ->where('user_id', $us['user_id'])->whereDate('tanggal', $tanggal)->get()->toArray();
             // dd($absensi[0]->jam_pulang,$us['name'],$tanggal);
             if (blank($absensi)) {
-                $nama = "\r\n" . $no.'.'.$us['nama_siswa'].'('.$us['kelas'].')';
+                $nama = "\r\n" . $no.'.'.$us['nama_siswa'].'-'.$us['kelas'].'-'.$us['nama_perusahaan'];
                 $no++;
             } elseif ($absensi[0]['jam_pulang'] == '0') {
-                $nama = "\r\n" . $no.'.'.$us['nama_siswa'].'('.$us['kelas'].')';
+                $nama = "\r\n" . $no.'.'.$us['nama_siswa'].'-'.$us['kelas'].'-'.$us['nama_perusahaan'];
                 $no++;
             }
 
